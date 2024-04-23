@@ -25,8 +25,8 @@ jobs:
         run: |
           cargo llvm-cov --lcov --output-path coverage.lcov 
           cargo build
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v2.2.3
+      - name: Send coverage to coveralls
+        uses: coverallsapp/github-action@master 
             
         if: matrix.os == 'ubuntu-latest’
         with:
