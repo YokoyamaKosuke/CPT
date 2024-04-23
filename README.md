@@ -1,6 +1,5 @@
 # CPT
 [![License](https://img.shields.io/badge/License-CC--BY--1.0-green.svg)](https://github.com/YokoyamaKosuke/CPT\_flows/blob/main/LICENSE)
-[![CI](https://github.com/YokoyamaKosuke/CPT/actions/workflows/blank.yml/badge.svg)](https://github.com/YokoyamaKosuke/CPT/actions/workflows/blank.yml)
 [![Version](https://shields.io/badge/Version-0.1.0-blue)](https://github.com/YokoyamaKosuke/CPT/releases/tag/v0.1.0)
 
 
