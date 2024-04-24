@@ -1,6 +1,7 @@
 # CPT
 [![License](https://img.shields.io/badge/License-CC--BY--1.0-green.svg)](https://github.com/YokoyamaKosuke/CPT\_flows/blob/main/LICENSE)
 [![Version](https://shields.io/badge/Version-0.1.0-blue)](https://github.com/YokoyamaKosuke/CPT/releases/tag/v0.1.0)
+[![Coverage Status](https://coveralls.io/repos/github/YokoyamaKosuke/CPT/badge.svg?branch=main)](https://coveralls.io/github/YokoyamaKosuke/CPT?branch=main)
 
 
 なんでも圧縮します
