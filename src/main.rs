@@ -11,7 +11,7 @@
 //     fn test_hello() {
 //         assert_eq!(hello(), "Hello, world!");
 //     }
-}
+// }
 
 use clap::Parser;
 use cli::CliOpts;
