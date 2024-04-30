@@ -24,8 +24,8 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    // use std::path::PathBuf;
-    // use cli::RunMode;
+    use std::path::PathBuf;
+    use cli::RunMode;
     use super::*;
 
     #[test]
