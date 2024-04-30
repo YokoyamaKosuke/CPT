@@ -3,6 +3,7 @@
 [![Version](https://shields.io/badge/Version-0.1.0-blue)](https://github.com/YokoyamaKosuke/CPT/releases/tag/v0.1.0)
 [![Coverage Status](https://coveralls.io/repos/github/YokoyamaKosuke/CPT/badge.svg?branch=main)](https://coveralls.io/github/YokoyamaKosuke/CPT?branch=main)
 [![Rust Report Card](https://rust-reportcard.xuri.me/badge/github.com/yokoyamakosuke/cpt)](https://rust-reportcard.xuri.me/report/github.com/yokoyamakosuke/cpt)
+[![DOI](https://zenodo.org/badge/784019734.svg)](https://zenodo.org/doi/10.5281/zenodo.11089955)
 
 
 なんでも圧縮します
