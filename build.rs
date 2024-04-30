@@ -13,7 +13,7 @@ fn generate(s: Shell, app: &mut Command, outdir: &Path, file: &str) {
 
     clap_complete::generate(s, app, "CPT", &mut dest);
 }
-
+ 
 fn main() {
     let mut app = CliOpts::command();
     app.set_bin_name("CPT");
