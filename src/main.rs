@@ -27,7 +27,7 @@ mod tests {
     use std::path::PathBuf;
     use cli::RunMode;
     use super::*;
-
+　
     #[test]
     fn test_run() {
         let opts = CliOpts::parse_from(&["cpt_test", "-o", "test.zip", "src", "LICENSE", "README.md", "Cargo.toml"]);
