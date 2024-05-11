@@ -11,7 +11,7 @@ pub struct CliOpts {
     pub mode: RunMode,
     #[clap(short = 'd', long = "dest", default_value = ".", value_name = "DEST", required = false, help = "Destination of the extraction results.")]
     pub dest: Option<PathBuf>,
-    #[clap(short = 'o', long = "output", default_value = "totebag.zip", value_name = "OUTPUT", required = false, help = "Output file for the archive.")]
+    #[clap(short = 'o', long = "output", default_value = "cpt.zip", value_name = "OUTPUT", required = false, help = "Output file for the archive.")]
     pub output: Option<PathBuf>,
     #[clap(short = 'n', long = "no-recursive", help = "No recursive mode.", default_value_t = false)]
     pub no_recursive: bool,
