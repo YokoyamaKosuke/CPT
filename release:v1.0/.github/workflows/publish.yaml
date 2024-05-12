@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         if: startsWith(github.head_ref, 'release/v') && github.event.pull_request.merged == true
         outputs:
-            appname: unicom
+            appname: CPT
             tag: ${{ steps.vars.outputs.tag }}
             upload_url: ${{ steps.create_release.outputs.upload_url }}
         steps:
