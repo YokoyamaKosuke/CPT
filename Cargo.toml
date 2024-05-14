@@ -1,5 +1,5 @@
 [package]
-name = "cpt"
+name = "CPT"
 version = "0.1.0"
 description = "A tool for archiving files and directories and extracting several archive formats."
 repository = "https://github.com/YokoyamaKosuke/CPT"
