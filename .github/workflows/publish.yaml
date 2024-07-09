@@ -150,7 +150,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           # ${{ github.repository }} = yokoyamakosuke/cpt
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/${{ github.repository | lower }}
           tags: |
             type=raw,value=latest
             type=sha,prefix=,suffix=,format=short
