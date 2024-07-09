@@ -8,8 +8,6 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    # ブランチ名が release/v から始まる場合のみに実行する．
-    # プルリクエストがマージされた場合のみに実行する．
     if: startsWith(github.head_ref, 'release/v') && github.event.pull_request.merged == true
     outputs:
       appname: CPT
@@ -32,6 +30,10 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Set lowercase repository name
+        id: repo_name
+        run: echo "repo_name=${{ github.repository }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
+
   publish:
     runs-on: ${{ matrix.os }}
     needs: setup
@@ -46,14 +48,6 @@ jobs:
             target: x86_64-unknown-linux-musl
             artifact_name: ${{ needs.setup.outputs.appname }}
             asset_name: ${{ needs.setup.outputs.appname }}-${{ needs.setup.outputs.tag }}_linux_arm64
-          # - os: ubuntu-latest
-          #   target: aarch64-pc-windows-gnullvm
-          #   artifact_name: ${{ needs.setup.outputs.appname }}.exe
-          #   asset_name: ${{ needs.setup.outputs.appname }}-${{ needs.setup.outputs.tag }}_windows_amd64
-          # - os: ubuntu-latest
-          #   target: x86_64-pc-windows-gnu
-          #   artifact_name: ${{ needs.setup.outputs.appname }}.exe
-          #   asset_name: ${{ needs.setup.outputs.appname }}-${{ needs.setup.outputs.tag }}_windows_arm64
           - os: macos-latest
             target: aarch64-apple-darwin
             artifact_name: ${{ needs.setup.outputs.appname }}
@@ -63,14 +57,12 @@ jobs:
             artifact_name: ${{ needs.setup.outputs.appname }}
             asset_name: ${{ needs.setup.outputs.appname }}-${{ needs.setup.outputs.tag }}_darwin_arm64
 
-          
     steps:
-      # initialization
       - name: Checkout the project
         uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0
 
       - name: Setup variables
         id: vars
@@ -78,7 +70,7 @@ jobs:
         run: |
           DIR=$(echo "${{ needs.setup.outputs.appname }}-${{ needs.setup.outputs.tag }}")
           echo "dir=$DIR" >> $GITHUB_OUTPUT
-  
+
       - name: Cache cargo registry
         uses: actions/cache@v1
         with:
@@ -104,14 +96,12 @@ jobs:
         run: |
           cargo build --release --target ${{ matrix.target }}
                   
-      # publish release
       - name: Create release file
         shell: bash
         run: |
           DIR=${{ steps.vars.outputs.dir }}
           DIST=${{ matrix.target }}
           mkdir -p dist/$DIST/$DIR
-          # cp -r site/public dist/$DIST/$DIR/docs
           cp -r README.md LICENSE target/completions target/${{ matrix.target }}/release/${{ matrix.artifact_name }} dist/$DIST/$DIR
           tar cvfz dist/${{ matrix.asset_name }}.tar.gz -C dist/$DIST $DIR
         
@@ -125,6 +115,7 @@ jobs:
           asset_name: ${{ matrix.asset_name }}.tar.gz
           asset_content_type: application/x-gzip
           upload_url: ${{ needs.setup.outputs.upload_url }}
+
   docker:
     needs: publish
     runs-on: ubuntu-latest
@@ -149,8 +140,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          ${{ github.repository }} = yokoyamakosuke/cpt
-          images: ghcr.io/${{ github.repository}}
+          images: ghcr.io/${{ steps.repo_name.outputs.repo_name }}
           tags: |
             type=raw,value=latest
             type=sha,prefix=,suffix=,format=short
@@ -167,5 +157,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository}}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ steps.repo_name.outputs.repo_name }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.repo_name.outputs.repo_name }}:buildcache,mode=max
