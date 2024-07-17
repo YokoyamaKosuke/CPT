@@ -11,6 +11,7 @@ mod sevenz;
 mod tar;
 mod zip;
 
+#[allow(dead_code)]
 pub struct ExtractorOpts {
     pub dest: PathBuf,
     pub use_archive_name_dir: bool,
