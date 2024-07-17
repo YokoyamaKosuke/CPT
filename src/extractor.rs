@@ -11,10 +11,11 @@ mod sevenz;
 mod tar;
 mod zip;
 
-#[allow(dead_code)]
+
 pub struct ExtractorOpts {
     pub dest: PathBuf,
     pub use_archive_name_dir: bool,
+    #[allow(dead_code)]
     pub overwrite: bool,
     pub v: Box<dyn Verboser>,
 }
