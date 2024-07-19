@@ -12,8 +12,10 @@
 zip,tar,jarなど，各種圧縮フォーマットを統一的なインターフェースで扱えるようにするものである．ソフトウェア名は，安易に圧縮ツール:Compression Tool からとってCPTにした．
 
 ## Usage
+複数の形式でファイルとディレクトリを抽出/アーカイブするためのツール
+
 ```sh
-CPT [OPTIONS] <ARGUMENTS...>
+Usage CPT [OPTIONS] <ARGUMENTS...>
 OPTIONS
   -m, --mode <MODE>     操作モードを extract, archive, auto から選択する．デフォルトは auto.
   -d, --dest <DEST>     出力先のディレクトリを指定する．デフォルトは current directory.
